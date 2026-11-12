@@ -50,7 +50,8 @@ ENGINES['sdxl'] = dict(
     tag='sdxl-base10-31e35c80-30step-en-gpuvae-v2', max_vram=4.0, timeout=2400,
     extra_args=['--scheduler','karras','--backend','te=cpu,vae=cuda0,diffusion=cuda0',
                 '--vae-tiling','--vae-tile-size','256','--disable-prefetch','--threads','1'])
-MODEL_LABELS = {'flux9': 'FLUX.2 klein 9B · Q4', 'sdxl': 'Stable Diffusion XL 1.0'}
+MODEL_LABELS = {'flux': 'FLUX.2 klein 4B · Q4', 'flux9': 'FLUX.2 klein 9B · Q4',
+                'sdxl': 'Stable Diffusion XL 1.0'}
 STYLES = {'3d':'3D animated film character style, soft studio lighting.', 'guoman':'中国动画漫画插画风格。',
           'anime':'日系动画插画，清晰线条，赛璐璐上色。', 'realistic':'自然光，真实摄影风格。',
           SOFT_PHOTO:SOFT_PHOTO_IMAGE_PROMPT}
@@ -62,6 +63,16 @@ def selected():
 
 def preferred_flux_engine():
     current=selected()
+    if current == 'flux':return current
+    if current in ENCODER_LABELS:return current
+    try: candidate=json.loads(CONFIG.read_text('utf-8-sig')).get('preferred_flux_engine')
+    except (OSError,ValueError,AttributeError):candidate=None
+    if isinstance(candidate,str) and candidate in (*ENCODER_LABELS, 'flux'):return candidate
+    return 'flux' if ready('flux') and not ready('flux9') else 'flux9'
+
+def preferred_9b_engine():
+    """Return a 9B variant even when the reference preference is 4B."""
+    current=selected()
     if current in ENCODER_LABELS:return current
     try: candidate=json.loads(CONFIG.read_text('utf-8-sig')).get('preferred_flux_engine')
     except (OSError,ValueError,AttributeError):candidate=None
@@ -69,7 +80,7 @@ def preferred_flux_engine():
 
 def resolve_engine(engine=None,references=False,reference_engine=None):
     """Identity references require FLUX; never silently discard them for SDXL."""
-    if reference_engine is not None and (not isinstance(reference_engine,str) or reference_engine not in ENCODER_LABELS):
+    if reference_engine is not None and (not isinstance(reference_engine,str) or reference_engine not in (*ENCODER_LABELS, 'flux')):
         raise ValueError('参考图引擎配置无效，未开始生成。')
     requested=engine or selected()
     if requested=='sdxl' and references:
@@ -132,14 +143,14 @@ def set_engine(engine):
     if not isinstance(engine,str) or engine not in MODEL_LABELS:
         raise ValueError('请选择列表中的绘图模型。')
     preferred=preferred_flux_engine()
-    actual=preferred if engine=='flux9' else engine
+    actual=preferred_9b_engine() if engine=='flux9' else engine
     if not ready(actual):raise ValueError('所选绘图模型文件未准备完整，设置没有更改。')
-    return _save_selection(dict(engine=actual,preferred_flux_engine=preferred,
+    return _save_selection(dict(engine=actual,preferred_flux_engine=actual if engine in ('flux', 'flux9') else preferred,
         model_selected_on=time.strftime('%Y-%m-%d %H:%M:%S')))
 
 def capabilities():
     engine=selected()
-    choices=[dict(id=key,label=label,available=ready(preferred_flux_engine() if key=='flux9' else key))
+    choices=[dict(id=key,label=label,available=ready(preferred_9b_engine() if key=='flux9' else key))
              for key,label in MODEL_LABELS.items()]
     selection_id='flux9' if engine in ENCODER_LABELS else engine
     if selection_id not in MODEL_LABELS:

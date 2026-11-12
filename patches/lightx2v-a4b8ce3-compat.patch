@@ -1,0 +1,21 @@
+--- a/lightx2v/common/ops/mm/mm_weight.py
++++ b/lightx2v/common/ops/mm/mm_weight.py
+@@ -180,6 +180,8 @@
+     ):
+         self.weight_name = weight_name
+         self.bias_name = bias_name
++        # Bias-free offloaded layers do not populate a bias buffer.
++        self.bias = None
+         self.create_cuda_buffer = create_cuda_buffer
+         self.create_cpu_buffer = create_cpu_buffer
+         self.lazy_load = lazy_load
+--- a/lightx2v/models/input_encoders/hf/wan/t5/model.py
++++ b/lightx2v/models/input_encoders/hf/wan/t5/model.py
+@@ -482,4 +482,6 @@
+         # layers
+-        self.token_embedding = vocab.to(dtype) if isinstance(vocab, nn.Embedding) else nn.Embedding(vocab, dim, dtype=dtype)
++        # Inference loads the complete pretrained embedding immediately below.
++        # Avoid a costly random initialization of the 256k-token table.
++        self.token_embedding = vocab.to(dtype) if isinstance(vocab, nn.Embedding) else nn.Embedding(vocab, dim, _weight=torch.empty(vocab, dim, dtype=dtype))
+         self.pos_embedding = T5RelativeEmbedding(num_buckets, num_heads, bidirectional=True, dtype=dtype) if shared_pos else None
+         self.dropout = nn.Dropout(dropout)

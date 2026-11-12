@@ -1,0 +1,592 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "group": "motion",
+      "url": "https://codeload.github.com/ModelTC/LightX2V/zip/a4b8ce30ac73ae561ec9d1a8bc6629e4aed9d2d8",
+      "dest": "app/work/setup-downloads/LightX2V-a4b8ce30.zip",
+      "size": 12659794,
+      "sha256": "e9995e64b21ca65c582bc3fb0d712e54f635e0fa50456f393583d621bd056277",
+      "source_to": "app/work/motion_test/LightX2V-main",
+      "source_root": "LightX2V-a4b8ce30ac73ae561ec9d1a8bc6629e4aed9d2d8",
+      "source_patch": "lightx2v"
+    },
+    {
+      "group": "lip",
+      "url": "https://codeload.github.com/TMElyralab/MuseTalk/zip/0a89dec45a0192b824e3cf4daf96c239440c5ed8",
+      "dest": "app/work/setup-downloads/MuseTalk-0a89dec4.zip",
+      "size": 15983311,
+      "sha256": "52521c3b5887558a29b39405b84eaba25e1194350b01bcc031002fa3ecd918e9",
+      "source_to": "app/work/local_test/MuseTalk-main",
+      "source_root": "MuseTalk-0a89dec45a0192b824e3cf4daf96c239440c5ed8",
+      "source_include": [
+        "musetalk/",
+        "LICENSE"
+      ]
+    },
+    {
+      "group": "image",
+      "url": "https://huggingface.co/leejet/FLUX.2-klein-4B-GGUF/resolve/3b1f5a9dc3abb32238b053aeb3d823c30afdacbd/flux-2-klein-4b-Q4_0.gguf",
+      "dest": "app/work/local_test/models/image_candidates/flux-2-klein-4b-Q4_0.gguf",
+      "size": 2460378560,
+      "sha256": "d1023499ef3f2f82ff7c50e6778495195c1b6cc34835741778868428111f9ff4"
+    },
+    {
+      "group": "image",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/a3efc24f613ef42d9428af62fdbd6f5fd8856c4a/full_encoder_small_decoder.safetensors",
+      "dest": "app/work/local_test/models/image_candidates/flux2_vae.safetensors",
+      "size": 249519092,
+      "sha256": "ea4273f02d1fafbf8e1d1c2cf6018ed8748652eb0bf34f2dd91171f16f15ab62"
+    },
+    {
+      "group": "image",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+      "dest": "app/work/local_test/models/Qwen3-4B-GGUF/Qwen3-4B-Q4_K_M.gguf",
+      "size": 2497280256,
+      "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+    },
+    {
+      "group": "image",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/3885219b6810b007914f3a7950a8d1b469d598a5/Qwen3.5-9B-Q4_K_M.gguf",
+      "dest": "app/work/local_test/models/Qwen3.5-9B-GGUF/Qwen3.5-9B-Q4_K_M.gguf",
+      "size": 5680522464,
+      "sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/config.json",
+      "size": 4908,
+      "sha256": "17a07f527a1c25ea30b4e023a184482a23d3e279d697b1dc81b1bde498d29cf9"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/generation_config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/generation_config.json",
+      "size": 245,
+      "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/merges.txt",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/merges.txt",
+      "size": 1671839,
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/model.safetensors",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/model.safetensors",
+      "size": 3833402552,
+      "sha256": "38b1d5971bdbd982b561cccec982669a53b0537c3cf5e9bd4778ed07bb2f5137"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/preprocessor_config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/preprocessor_config.json",
+      "size": 127,
+      "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/speech_tokenizer/config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/speech_tokenizer/config.json",
+      "size": 2336,
+      "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/speech_tokenizer/configuration.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/speech_tokenizer/configuration.json",
+      "size": 76,
+      "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/speech_tokenizer/model.safetensors",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/speech_tokenizer/model.safetensors",
+      "size": 682293092,
+      "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/speech_tokenizer/preprocessor_config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/speech_tokenizer/preprocessor_config.json",
+      "size": 234,
+      "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/tokenizer_config.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/tokenizer_config.json",
+      "size": 7344,
+      "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670"
+    },
+    {
+      "group": "voice",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/resolve/0c0e3051f131929182e2c023b9537f8b1c68adfe/vocab.json",
+      "dest": "app/work/local_test/models/Qwen3-TTS-1.7B-CustomVoice/vocab.json",
+      "size": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/Wan2.1_VAE.pth",
+      "dest": "app/work/motion_test/models/distill_fp8/Wan2.1_VAE.pth",
+      "size": 507609880,
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_0.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_0.safetensors",
+      "size": 404393192,
+      "sha256": "8a13c9ed21e3180b4483138b888e66c5ea94dfcf1a7843c52bd89bb9f41af512"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_1.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_1.safetensors",
+      "size": 404393192,
+      "sha256": "e36e70d8a4f0041ecc43745aaea284596253480aeab8e3234512b9ebdefc22c7"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_10.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_10.safetensors",
+      "size": 404393232,
+      "sha256": "8c32b197849dc5bddee79bc1012c95cba5a245b9c7b2ef40ea841ec3c22d9d93"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_11.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_11.safetensors",
+      "size": 404393232,
+      "sha256": "1eb9a4430f41d86d24f198bd617631e25a11a8001bef67150a8649e3cefe8829"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_12.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_12.safetensors",
+      "size": 404393232,
+      "sha256": "37d76f0e2b553514c77cd4780cdbd682129f17217af561be9bc90a4feafd4ff3"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_13.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_13.safetensors",
+      "size": 404393232,
+      "sha256": "0e658c630e47b7b4b5a30cad0a78d5c4364c740b44f68634d66ca7c9609ca3e4"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_14.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_14.safetensors",
+      "size": 404393232,
+      "sha256": "d607c83c42aa75f9af7fab1549f06239f2668ee247f24d922f2a9f52c9507571"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_15.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_15.safetensors",
+      "size": 404393232,
+      "sha256": "039d4199341d719866a2137a89e8096cb4f72a798f10aed47d00d738a810ff27"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_16.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_16.safetensors",
+      "size": 404393232,
+      "sha256": "5c9b7ef490522b147d2af4a2043ba8744738b271ad7d79fa3443a96627a58d21"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_17.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_17.safetensors",
+      "size": 404393232,
+      "sha256": "13253e4faa521219a72a7bb62d82aef082a3d81b86be713d52298e0baabf2bdf"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_18.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_18.safetensors",
+      "size": 404393232,
+      "sha256": "58213199765de028dc60f0a42310acedfdce242b6479ca84a9b9df5124d37e24"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_19.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_19.safetensors",
+      "size": 404393232,
+      "sha256": "05003c252069c3655f89098642d06bcacb6b3ec01a8cf34dd0cb9144b9ba0598"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_2.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_2.safetensors",
+      "size": 404393192,
+      "sha256": "77c1686dd705b7d1d11da6cce4c8b82e7253f1b6b7b1de027635c9e3ae220df9"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_20.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_20.safetensors",
+      "size": 404393232,
+      "sha256": "c351d87091e1f8414ed1bc11ddb52e5fa1d06c44832d376b5d46f978261c036b"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_21.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_21.safetensors",
+      "size": 404393232,
+      "sha256": "a312f43266e9c1485dc8b3c9a0867d59aff9354a21987f8c6942af359d8780ac"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_22.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_22.safetensors",
+      "size": 404393232,
+      "sha256": "8a761cc970f5159e612db4cd87b9313a4031ac1e0fd2b834a6a9bbdf60a4bec9"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_23.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_23.safetensors",
+      "size": 404393232,
+      "sha256": "a0b204b49f3b405782536b6b11cefcb300ca95ac54c797aadfb6bf4071e43016"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_24.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_24.safetensors",
+      "size": 404393232,
+      "sha256": "4de844af9c11481eda081e4dbb9e84528295778e7981d9a20c39e20bf5bc43c7"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_25.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_25.safetensors",
+      "size": 404393232,
+      "sha256": "18337262ab686e775aafd8aa4c61f4899cc282603aa39b8a9fa1ac49c6dcad8f"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_26.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_26.safetensors",
+      "size": 404393232,
+      "sha256": "89f3b0b1edbeb303041808062de5ea03d15043d27fe3b7836c1229278ebdc1ba"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_27.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_27.safetensors",
+      "size": 404393232,
+      "sha256": "3084873e7aa389ea68c445b132da12652c55cf070d7ca7a798ad0b08d7d8c087"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_28.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_28.safetensors",
+      "size": 404393232,
+      "sha256": "b8a502c11baf9cb69987acad3872558692cd3518ea5fc9e1c31bdebcc600b836"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_29.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_29.safetensors",
+      "size": 404393232,
+      "sha256": "d0d461ddef6a4103600b0c87ed239fddba0f47c1e27f7a0083f20635a742a6aa"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_3.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_3.safetensors",
+      "size": 404393192,
+      "sha256": "c6458712a21c73bc6c54cf40e64de7d2c4b8f1a8520abb7f1980c0ca44d8a013"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_30.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_30.safetensors",
+      "size": 404393232,
+      "sha256": "d038db75d439f4223af1d5caab128c5ae843642daec732280abdf1da31c1516c"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_31.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_31.safetensors",
+      "size": 404393232,
+      "sha256": "ab98d2c3de31b2e2d5e621862f4192f7c132202de372529b58d3de8d89e5533c"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_32.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_32.safetensors",
+      "size": 404393232,
+      "sha256": "575b91e17bd0ba5354640dde4cebff218160bb29e201127f61283ee0696de88c"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_33.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_33.safetensors",
+      "size": 404393232,
+      "sha256": "2536f63d79392d4ea2f48cfd789f7084cb3c78d27c2cf47f1720ce18d5a3a726"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_34.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_34.safetensors",
+      "size": 404393232,
+      "sha256": "c0d32e9adbfd0d6743291ed7c2338abbca78a4352f243c8c30a37054abad8ace"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_35.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_35.safetensors",
+      "size": 404393232,
+      "sha256": "59b95887b85b9122a49c986b2ab265c001a8344896d91e6a51a79a66db897309"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_36.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_36.safetensors",
+      "size": 404393232,
+      "sha256": "6496e46ed7913805a71c1db1e403977de91831eacabb510fd39a2ba34626c7e2"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_37.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_37.safetensors",
+      "size": 404393232,
+      "sha256": "b0e08d56b8cb1a69c7aea703ace8a0fecf8915981f07cabcd679c891c4c3c1c1"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_38.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_38.safetensors",
+      "size": 404393232,
+      "sha256": "fdeebb3c7c9de08da1c4e640c7bd520f8fba182d6267b2aebff129102cda1d46"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_39.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_39.safetensors",
+      "size": 404393232,
+      "sha256": "01e5efb7f9eb9c1da8001bb243cde8dae3725303c0cd9d1758ac5cdf03dd477a"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_4.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_4.safetensors",
+      "size": 404393192,
+      "sha256": "73a31967f573fdb6eb5bcd269b42b9a64428d1b93ee1a06ca7d0b26f5152fc63"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_5.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_5.safetensors",
+      "size": 404393192,
+      "sha256": "ef09b420a16be90af80f1d9888dffccfd49a7dbdac99139a4f082e222fc884c1"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_6.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_6.safetensors",
+      "size": 404393192,
+      "sha256": "af5bd16384da77090ec879969885fa570e8986ac4d3aae16c772e13383357ddb"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_7.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_7.safetensors",
+      "size": 404393192,
+      "sha256": "758e1ba74a308e4c1756ae117c376bf6ca3053007fff827e6820472454e9ff92"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_8.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_8.safetensors",
+      "size": 404393192,
+      "sha256": "a0eed8055bbb551237d79142c3f5b6e89b5d9f7067b18fb49aa1708bd75cd6be"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/block_9.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/block_9.safetensors",
+      "size": 404393192,
+      "sha256": "eaf8fd7fe69c5f2379a3fe33bed192b38ae5252d0643de5aa6313fec53d547b6"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/clip-fp8.pth",
+      "dest": "app/work/motion_test/models/distill_fp8/clip-fp8.pth",
+      "size": 636647292,
+      "sha256": "f20da116c0ee6b0aeb1e73033996efec8c8b51640ba9926fb51372a1b199d289"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/config.json",
+      "dest": "app/work/motion_test/models/distill_fp8/config.json",
+      "size": 250,
+      "sha256": "b715e6ed094566c73a05e99129105683ff4362af6a783a17dc0dd32884a5d4a7"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/diffusion_pytorch_model.safetensors.index.json",
+      "dest": "app/work/motion_test/models/distill_fp8/diffusion_pytorch_model.safetensors.index.json",
+      "size": 108583,
+      "sha256": "992149e4cf1886f3e533c74255c343c5b96e286229f57fccedacf042b8f6b34e"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/google/umt5-xxl/special_tokens_map.json",
+      "dest": "app/work/motion_test/models/distill_fp8/google/umt5-xxl/special_tokens_map.json",
+      "size": 6623,
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/google/umt5-xxl/spiece.model",
+      "dest": "app/work/motion_test/models/distill_fp8/google/umt5-xxl/spiece.model",
+      "size": 4548313,
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/google/umt5-xxl/tokenizer.json",
+      "dest": "app/work/motion_test/models/distill_fp8/google/umt5-xxl/tokenizer.json",
+      "size": 16837417,
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/google/umt5-xxl/tokenizer_config.json",
+      "dest": "app/work/motion_test/models/distill_fp8/google/umt5-xxl/tokenizer_config.json",
+      "size": 61728,
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/models_t5_umt5-xxl-enc-fp8.pth",
+      "dest": "app/work/motion_test/models/distill_fp8/models_t5_umt5-xxl-enc-fp8.pth",
+      "size": 6733412795,
+      "sha256": "546b3b1c73d05ccfa027340e43467558da043d58907389b56e0fb1b5018187f7"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/non_block.safetensors",
+      "dest": "app/work/motion_test/models/distill_fp8/non_block.safetensors",
+      "size": 965363000,
+      "sha256": "1610ac0ed5131a6f434bc7226f81b2088b75a4917cc2b11c65a66b18aa07077d"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/taew2_1.pth",
+      "dest": "app/work/motion_test/models/distill_fp8/taew2_1.pth",
+      "size": 22679486,
+      "sha256": "f986092baa4a124035dcf44ef59cd30e0bef91b2aa4d6a6e8e152e55e82ca30c"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/xlm-roberta-large/sentencepiece.bpe.model",
+      "dest": "app/work/motion_test/models/distill_fp8/xlm-roberta-large/sentencepiece.bpe.model",
+      "size": 5069051,
+      "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/xlm-roberta-large/special_tokens_map.json",
+      "dest": "app/work/motion_test/models/distill_fp8/xlm-roberta-large/special_tokens_map.json",
+      "size": 280,
+      "sha256": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/xlm-roberta-large/tokenizer.json",
+      "dest": "app/work/motion_test/models/distill_fp8/xlm-roberta-large/tokenizer.json",
+      "size": 17082660,
+      "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626"
+    },
+    {
+      "group": "motion",
+      "url": "https://huggingface.co/lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v/resolve/fef288b326f4fed6d2983b9800c35363da31fcfe/distill_fp8/xlm-roberta-large/tokenizer_config.json",
+      "dest": "app/work/motion_test/models/distill_fp8/xlm-roberta-large/tokenizer_config.json",
+      "size": 418,
+      "sha256": "efb5c0d09722e5fe59a462cd2a9976ee216d55b037597d997cd3fe833216da15"
+    },
+    {
+      "group": "image",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/releases/download/master-929-3f8527a/sd-master-3f8527a-bin-win-cuda12-x64.zip",
+      "dest": "app/work/setup-downloads/sd-master-3f8527a-bin-win-cuda12-x64.zip",
+      "size": 337915440,
+      "sha256": "217d6dead9abd3f827fc338268555cc179234e7e6330ef21ecb1c985e19d2dc7",
+      "extract_to": "app/runtime/image-engine"
+    },
+    {
+      "group": "image",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/releases/download/master-929-3f8527a/cudart-sd-bin-win-cu12-x64.zip",
+      "dest": "app/work/setup-downloads/cudart-sd-bin-win-cu12-x64.zip",
+      "size": 563452046,
+      "sha256": "fe20366827d357c00797eebb58244dddab7fd9a348d70090c3871004c320f38d",
+      "extract_to": "app/runtime/image-engine"
+    },
+    {
+      "group": "image",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11081/llama-b11081-bin-win-cuda-12.4-x64.zip",
+      "dest": "app/work/setup-downloads/llama-b11081-bin-win-cuda-12.4-x64.zip",
+      "size": 253987246,
+      "sha256": "07cf4359031fb6f461c2eb26378eef0aa4ade535c98e034f3e7f195f6f2206ea",
+      "extract_to": "app/runtime/portrait-translator"
+    },
+    {
+      "group": "image",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11081/cudart-llama-bin-win-cuda-12.4-x64.zip",
+      "dest": "app/work/setup-downloads/cudart-llama-bin-win-cuda-12.4-x64.zip",
+      "size": 391443627,
+      "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6",
+      "extract_to": "app/runtime/portrait-translator"
+    },
+    {
+      "group": "lip",
+      "url": "https://huggingface.co/TMElyralab/MuseTalk/resolve/2bcb936e2fddb4d86db4c62fd45b387d0c061571/musetalk/musetalk.json",
+      "dest": "app/work/local_test/models/Linly-MuseTalk/MuseTalk/musetalk/musetalk.json",
+      "size": 748,
+      "sha256": "5b6923aee04d71692e0e9846c471e0a4ea07a4f686d39545e472bd4ba17e1b47"
+    },
+    {
+      "group": "lip",
+      "url": "https://huggingface.co/TMElyralab/MuseTalk/resolve/2bcb936e2fddb4d86db4c62fd45b387d0c061571/musetalk/pytorch_model.bin",
+      "dest": "app/work/local_test/models/Linly-MuseTalk/MuseTalk/musetalk/pytorch_model.bin",
+      "size": 3400076549,
+      "sha256": "0ee7d5ea03ea75d8dca50ea7a76df791e90633687a135c4a69393abfc0475ffe"
+    },
+    {
+      "group": "lip",
+      "url": "https://huggingface.co/stabilityai/sd-vae-ft-mse/resolve/31f26fdeee1355a5c34592e401dd41e45d25a493/config.json",
+      "dest": "app/work/local_test/models/Linly-MuseTalk/MuseTalk/sd-vae-ft-mse/config.json",
+      "size": 547,
+      "sha256": "92d3dfb746fca211a2c9e019e285f8597412211728dce3c5bcf4eda0f2d62e7e"
+    },
+    {
+      "group": "lip",
+      "url": "https://huggingface.co/stabilityai/sd-vae-ft-mse/resolve/31f26fdeee1355a5c34592e401dd41e45d25a493/diffusion_pytorch_model.bin",
+      "dest": "app/work/local_test/models/Linly-MuseTalk/MuseTalk/sd-vae-ft-mse/diffusion_pytorch_model.bin",
+      "size": 334707217,
+      "sha256": "1b4889b6b1d4ce7ae320a02dedaeff1780ad77d415ea0d744b476155c6377ddc"
+    },
+    {
+      "group": "lip",
+      "url": "https://openaipublic.azureedge.net/main/whisper/models/65147644a518d12f04e32d6f3b26facc3f8dd46e5390956a9424a650c0ce22b9/tiny.pt",
+      "dest": "app/work/local_test/models/Linly-MuseTalk/MuseTalk/whisper/tiny.pt",
+      "size": 75572083,
+      "sha256": "65147644a518d12f04e32d6f3b26facc3f8dd46e5390956a9424a650c0ce22b9"
+    },
+    {
+      "group": "lip",
+      "url": "https://media.githubusercontent.com/media/opencv/opencv_zoo/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/face_detection_yunet/face_detection_yunet_2023mar.onnx",
+      "dest": "app/work/local_test/models/YuNet/face_detection_yunet_2023mar.onnx",
+      "size": 232589,
+      "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+    }
+  ]
+}
