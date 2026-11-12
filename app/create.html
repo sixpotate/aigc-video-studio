@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>作品创作 · AI仿真人短剧工作台</title><link rel="stylesheet" href="/story.css"><script type="module" src="/story.js"></script></head>
+<body>
+<header><a class="brand" href="/create">AI仿真人短剧工作台</a><nav><a href="/create" aria-current="page">作品创作</a><a href="/library">角色库</a></nav><span id="connection">连接中</span></header>
+<main>
+<aside>
+  <div class="intro"><span class="eyebrow">面向普通创作者</span><h1>定好人物，放入剧本</h1><p>软件固定人物与场景，按对白安排镜头，制作后自动检查画面。你只需确认故事，并试看成片。</p></div>
+  <form id="brief-form">
+    <details class="input-step" open><summary><span class="step-number">1</span><strong>作品</strong></summary>
+      <label for="brief-title">作品名称</label><input id="brief-title" maxlength="60" placeholder="输入作品名称" required>
+      <div class="grid2"><div><label for="work-mode">作品类型</label><select id="work-mode"><option value="original">我的原创作品</option><option value="existing">已有作品</option></select></div><div><label for="brief-style">画面风格</label><select id="brief-style"><option value="realistic">仿真人 · 写实</option><option value="soft_photo">柔光真人写真</option><option value="guoman">国漫插画</option><option value="anime">日系插画</option><option value="3d">3D动画</option></select></div></div>
+      <label class="check"><input id="online-research" type="checkbox" checked>联网查找相关参考</label><p id="research-hint" class="hint">根据作品名称、人物与剧本寻找场景、服装和视觉参考。网上资料作为补充，以你的设定为准。</p>
+      <button id="research" type="button" class="subtle">先查找参考资料</button>
+    </details>
+    <details class="input-step" open><summary><span class="step-number">2</span><strong>人物</strong><small id="cast-count">尚未选择</small></summary><p class="hint">先选好演员。写清名字、外貌、衣着和性格即可。</p>
+      <label for="image-model">绘图模型</label><select id="image-model" aria-describedby="image-model-note" disabled><option value="">正在读取可选模型…</option></select>
+      <p id="image-model-note" class="hint" role="status" aria-live="polite">切换只保存设置，不会开始生成；已有图片不变。</p>
+      <div id="selected-roles" class="selected-roles"></div>
+      <div class="toolbar"><button id="add-role" type="button">＋ 新增角色</button><button id="choose-role" type="button" class="subtle">从角色库选择</button></div>
+      <div id="role-picker" class="role-picker" hidden><label for="role-search">查找已保存角色</label><input id="role-search" type="search" placeholder="输入角色名字"><div id="library-roles"></div><button id="close-picker" type="button" class="subtle">收起角色库</button></div>
+    </details>
+    <details class="input-step" open><summary><span class="step-number">3</span><strong>剧本</strong></summary><label for="brief-script" class="sr-only">完整剧本</label><textarea id="brief-script" rows="10" maxlength="60000" placeholder="粘贴完整剧本，包括场景、动作和对白。" required></textarea>
+      <div class="script-tools"><label class="file-label" for="script-file">导入文字文件<input id="script-file" type="file" accept=".md,.txt,text/plain,text/markdown"></label><span id="script-count" class="hint">0 字</span></div><p class="hint">保留你的原稿和对白，自动推演场景、动作、取景与配音。无需填写镜头表。</p>
+    </details>
+    <button id="prepare" class="primary full" type="submit">理解剧本并准备画面</button><p id="draft-state" class="hint" aria-live="polite">输入会自动保存在这台电脑的浏览器中。</p>
+  </form>
+  <details class="saved"><summary>已保存作品与新建</summary><label for="saved-projects">打开已有作品</label><select id="saved-projects"></select><div class="toolbar"><button id="open-story" type="button">打开</button><button id="new-story" type="button" class="subtle">新建草稿</button></div><p class="hint">每次准备都会另存为新作品，保留旧剧本与成片。新建时会暂存当前输入。</p><button id="restore-draft" type="button" class="subtle" hidden>恢复上一份草稿</button></details>
+</aside>
+<section class="workspace" aria-label="创作结果">
+  <div class="workspace-heading"><div><span class="eyebrow">资料 → 人物 → 剧情画面 → 视频</span><h2 id="story-title">从你的作品开始</h2></div><span class="local-badge">本地制作</span></div>
+  <section class="progress-panel" aria-live="polite">
+    <div class="progress-heading"><strong id="status">正在连接本地服务…</strong><span id="percent">连接中</span></div>
+    <progress id="progress" max="100" value="0" aria-label="当前阶段进度"></progress>
+    <p id="elapsed-time" class="hint" aria-live="off" hidden></p>
+    <p id="engine-note" class="hint"></p>
+    <div id="production-next" hidden><button id="produce-top" type="button" class="primary" disabled>开始生成视频</button><p id="production-next-note" class="hint"></p></div>
+    <div class="toolbar"><button id="stop" type="button" disabled>停止任务</button><button id="resume" type="button" hidden>继续未完成的准备</button><span id="model-note" class="hint">联网仅用于查找参考；绘图与视频在本机生成。</span></div>
+  </section>
+  <details id="research-panel" class="panel" hidden><summary>参考资料 <span id="research-summary"></span></summary><p id="research-message" class="hint"></p><div id="research-sources" class="reference-list"></div><p id="research-queries" class="hint"></p></details>
+  <details class="panel" id="material-library" hidden><summary>已安装的声音素材 <span id="material-count"></span></summary><p class="hint">新作品会根据动作自动选择音效。这里可试听素材，不需要逐条配置。事件音效的位置是自动估计，成片仍需试听核对。</p><div class="grid2"><div><label for="material-category">声音类别</label><select id="material-category"></select></div><div><label for="material-item">试听素材</label><select id="material-item"></select></div></div><audio id="material-audio" controls preload="none"></audio><p id="material-license" class="hint"></p></details>
+  <section id="empty" class="empty"><div class="empty-mark" aria-hidden="true">▦</div><h2>让软件接手镜头工作</h2><p>填写作品名称，选好人物，放入剧本。<br>这里将展示参考资料、人物和自动安排的剧情画面。</p><p class="hint">你随时可以停止，已经完成的内容会保存。</p></section>
+  <div id="document" hidden>
+    <section class="panel"><div class="section-heading"><h3>本作品的演员</h3><span id="asset-count" class="hint"></span></div><div id="actors" class="actor-grid"></div><button id="prepare-portraits" type="button" class="subtle" hidden>继续准备缺少的人物与场景</button></section>
+    <section class="panel"><div class="section-heading"><div><h3>剧情画面</h3><p class="hint">软件根据剧本安排。确认故事和人物后即可制作视频。</p></div><label id="episode-field" class="episode-field">分集<select id="episode"></select></label></div><p id="episode-summary"></p><div id="story-preview" class="story-preview"></div><div class="production-actions"><button id="produce" type="button" class="primary">生成这一集视频</button><p id="production-note" class="hint">视频生成较慢，可随时停止并保留已完成镜头。</p></div></section>
+    <section id="film-preview" class="panel" hidden><h3>成片预览</h3><video id="film" controls playsinline preload="metadata"></video><p id="film-info" class="hint"></p><a id="film-download" class="button" download>下载视频</a></section>
+    <details class="panel"><summary>制作检查与更多操作</summary><ul id="issues"></ul><div class="toolbar"><button id="export-story" type="button">导出创作工程</button><button id="advanced" type="button" class="subtle">高级编辑</button></div><p class="hint">高级编辑用于逐镜修改；普通制作无需进入。旧作品仍可在这里继续制作。</p></details>
+  </div>
+</section>
+</main>
+<dialog id="role-editor" aria-labelledby="role-editor-title"><form id="role-form"><div class="dialog-heading"><h2 id="role-editor-title">新增角色</h2><button id="close-role" type="button" class="icon-button" aria-label="关闭角色编辑">×</button></div><label for="role-name">角色名称</label><input id="role-name" maxlength="30" required placeholder="与剧本中使用的名字一致"><label for="role-description">完整人物设定</label><textarea id="role-description" rows="7" maxlength="1200" required placeholder="写下人物的年龄、外貌、衣着与性格。"></textarea><p class="hint">使用作品的画面风格。保存后会自动加入这部作品。</p><details><summary>角色声音 · 可选</summary><label for="simple-role-voice">声音类型</label><select id="simple-role-voice"></select><p class="hint">默认根据人物设定匹配；也可在角色库逐个试听。怪物对白与怪物吼叫音效分别处理。</p></details><p id="role-message" class="hint" role="status"></p><div class="toolbar"><button id="save-role" type="submit">保存设定</button><button id="draw-role" type="button" class="primary">保存并生成人物</button></div></form></dialog>
+<div id="toast" role="alert" hidden></div>
+</body></html>

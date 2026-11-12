@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>高级编辑 · 漫剧工作台</title><link rel="stylesheet" href="/director.css"><script type="module" src="/director.js"></script></head>
+<body>
+  <header class="topbar"><a class="brand" href="/create">漫剧工作台</a><nav><a href="/create">作品创作</a><a href="/library">角色库</a><a class="active" href="/director" aria-current="page">高级编辑</a></nav><span id="connection">连接中</span></header>
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="intro"><span class="eyebrow">DIRECTOR</span><h1>让你的角色<br>演出自己的故事</h1><p>每个镜头分别选择演员、动作和台词，试听满意后再生成视频。</p></div>
+      <label>作品名称<input id="title" maxlength="60" class="editor-input" placeholder="为这个故事取个名字"></label>
+      <details class="import-box"><summary>打开已保存作品</summary><select id="project-library" class="editor-input" aria-label="已保存作品"></select><button id="open-project" class="button editor-input">打开作品</button><button id="refresh-projects" class="text-button editor-input">刷新列表</button><p class="hint">切换前请保存修改；当前未保存内容会保留为可恢复草稿。</p></details>
+      <div class="export-settings"><strong>画面与导出</strong><label>画面比例<select id="export-ratio" class="editor-input"><option value="9:16">竖屏 9:16</option><option value="16:9">横屏 16:9</option><option value="1:1">方形 1:1</option></select></label><label>导出分辨率<select id="export-resolution" class="editor-input"><option value="540">540p · 预览尺寸</option><option value="720">720p</option><option value="1080">1080p · 全高清</option><option value="1440">2K · 1440p</option></select></label><p id="export-description" class="hint"></p><p class="hint">先生成动作，再按需要进行AI细节修复与放大，最后绘制清晰字幕。成片会分别标明原生画面与导出尺寸，放大不等于原生2K。</p></div>
+      <label>新增镜头默认角色<select id="default-role" class="editor-input"></select></label>
+      <p class="hint">先在<a href="/library">角色库</a>生成人物形象，再选择出镜角色。</p>
+      <button id="add-shot" class="button editor-input">＋ 新增镜头</button>
+      <details class="import-box" open><summary>自动拆分镜</summary><label>角色名：台词 · 使用角色库中的名称<textarea id="import-script" class="editor-input" rows="6" maxlength="60000" placeholder="按角色名、动作和对白输入剧本。"></textarea></label><label class="check"><input id="keep-pair" type="checkbox" class="editor-input" checked>让对话双方保持同框</label><button id="import-shots" class="button editor-input">自动拆分镜</button><p class="hint">本地按角色名、对白和括号动作拆分，长句自动分段；对白可自动适配至15秒，最多300镜；纯场景镜头需选择背景图片。未知角色会提示，不会悄悄替换。</p></details>
+      <details class="import-box" open><summary>原稿与角色别名</summary><label>导入本机分镜脚本<input id="script-file" type="file" accept=".md,.txt" class="editor-input"></label><label>剧本称呼 = 角色库完整名称<textarea id="import-aliases" class="editor-input" rows="3" maxlength="4000" placeholder="输入剧本称呼与角色库名称的对应关系。"></textarea></label><p class="hint">支持含“镜号、画面内容、台词”列的 Markdown 分镜表。独白与画外音会分别识别；未知称呼需在这里对应角色，不会自动替换。</p></details>
+      <details class="import-box" open><summary>整片配乐与混音</summary><label>配乐<select id="music-track" class="editor-input"></select></label><label>导入本机音乐<input id="music-upload" type="file" accept="audio/*" class="editor-input"></label><label>音乐音量 / dB<input id="music-level" type="number" min="-36" max="-6" step="1" class="editor-input"></label><label class="check"><input id="music-duck" type="checkbox" class="editor-input" checked>说话时自动压低音乐</label><label>淡入淡出 / 秒<input id="music-fade" type="number" min="0" max="5" step=".2" class="editor-input"></label><button id="music-preview" class="button editor-input">试听配乐本身</button><audio id="music-player" controls hidden></audio><p class="hint">数值越接近0，音乐越响。调整后可只混音导出；已有画面和口型会复用。</p></details>
+      <label class="check"><input id="caption-speaker" class="editor-input" type="checkbox">字幕前显示说话人名字</label><p class="hint">自动字幕 · 白字黑边 · 底部居中</p>
+      <button id="render-voices" class="button editor-input">先生成全部配音 · 核对时长</button>
+      <div class="sidebar-actions"><button id="save" class="button editor-input">保存作品</button><button id="render-all" class="button primary editor-input">生成完整短剧</button><button id="assemble" class="button editor-input">只混音并导出 · 复用画面</button><button id="stop" class="button" disabled>停止生成</button><button id="new-project" class="text-button editor-input">新建作品</button><button id="restore-draft" class="text-button editor-input" hidden>恢复上次草稿</button></div>
+      <p id="save-state" class="hint" role="status">修改会保留在本机草稿中。</p>
+      <div class="notes"><strong>本地制作 · 无需额度</strong><p id="model-state">正在检查动作模型…</p><p>软件固定本作品的人物与场景，根据实际对白时长安排连续画面、说话人近景和听者反应。</p><p>画面会进行本地抽样检查，明确错误最多自动重做一次。复杂动作仍需试看核对；精细制作可能较慢，进度中会显示当前步骤与用时。</p></div>
+    </aside>
+    <section class="workspace" aria-label="镜头编排与预览">
+      <div class="feature-status" aria-label="第一优先级功能"><span>分镜编辑 <b>可用</b></span><span>角色动作与口型 <b>可用</b></span><span>自动字幕 <b>可用</b></span><span>角色音色 <b>可用</b></span></div>
+      <div class="heading"><div><h2>镜头与配音 <span id="shot-count">0</span></h2><p>先试听，再制作；改一镜，只重做这一镜。</p></div><span id="duration">尚未生成配音</span></div>
+      <div class="shot-toolbar"><input id="shot-search" type="search" placeholder="查找台词、角色或原稿镜号" aria-label="查找镜头"><button id="collapse-shots" class="text-button">收起全部</button><button id="expand-shots" class="text-button">展开全部</button></div>
+      <details class="story-overview"><summary>分镜总览与制作检查 <span id="story-overview-summary"></span></summary><p id="story-preflight" class="hint"></p><div class="story-table-wrap"><table><thead><tr><th>镜号</th><th>场景 / 剧情</th><th>角色 / 台词</th><th>取景</th><th>时长</th><th>状态</th></tr></thead><tbody id="story-overview-rows"></tbody></table></div><p class="hint">点击镜号编辑或单独重做。目标时长是估计值，生成配音后显示实际时长。已固定的参考图不随角色库主图切换。</p></details>
+      <section class="progress-box"><div><strong id="status">准备就绪</strong><span id="percent">0%</span></div><progress id="progress" max="100" value="0" aria-label="生成进度"></progress><p id="elapsed-time" class="hint" aria-live="off" hidden></p><p id="message" role="status" aria-live="polite">正在连接本地制作器…</p></section>
+      <section id="final-panel" class="final-panel" hidden><div><h2>完整短剧</h2><p id="final-description"></p><a id="download-final" class="button" download>下载视频</a><button id="video-folder" class="text-button">打开视频文件夹 ↗</button></div><video id="final-video" controls preload="metadata" playsinline></video></section>
+      <div id="shot-list"></div>
+      <section id="empty" class="empty" hidden><h2>从一个镜头开始</h2><p>选择已生成人物形象的角色，点击“新增镜头”。</p><a href="/library">去角色库创建人物 ↗</a></section>
+    </section>
+  </main><div id="toast" role="alert" hidden></div>
+</body></html>

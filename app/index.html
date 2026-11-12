@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>漫剧工作台 · 本地AI短剧制作器</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/characters.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="漫剧工作台首页"><span class="brand-mark" aria-hidden="true">M</span><span>漫剧工作台<small>本地创作工具</small></span></a>
+    <div class="header-right"><a class="button" href="/create">作品创作 ↗</a><span id="connection" class="connection"><i></i>连接中</span><button id="help-button" class="button text-button">使用说明</button></div>
+  </header>
+  <main class="workspace">
+    <aside class="controls" aria-label="操作控制面板">
+      <form id="project-form">
+        <fieldset id="editor-fields">
+          <section class="control-section">
+            <div class="section-heading"><h2><span>01</span>故事剧本</h2><button type="button" id="example-button" class="text-button">载入示例</button></div>
+            <label class="field"><span>作品名称</span><input id="title" maxlength="60" placeholder="给这个故事取个名字"></label>
+            <label class="field script-field"><span>漫剧剧本 <small id="script-count">0 / 6000</small></span><textarea id="script" maxlength="6000" rows="7" placeholder="输入场景、动作或对白，每段单独一行。" required></textarea></label>
+            <p class="field-hint">按段落分配镜头；可在右侧查看对应文字。</p>
+          </section>
+          <section class="control-section role-section">
+            <div class="section-heading"><h2><span>02</span>角色设定</h2><span id="character-count" class="muted micro">0 个角色 · 不限数量</span><button type="button" id="add-character" class="button small add-role">＋ 新增角色</button></div>
+            <label class="field"><span>绘图模型</span><select id="image-model" aria-describedby="image-model-note" disabled><option value="">正在读取可选模型…</option></select></label>
+            <p id="image-model-note" class="field-hint" role="status" aria-live="polite">切换只保存设置，不会开始生成；已有图片不变。</p>
+            <div id="characters" class="character-list"></div>
+            <div id="character-undo" class="character-undo" hidden><span id="character-undo-label"></span><button type="button" id="undo-character" class="text-button">撤销移除</button></div>
+            <p class="field-hint">可新增、编辑并生成人物形象。外貌与服装用于绘制，性格作为创作设定保存。</p>
+          </section>
+          <section class="control-section parameters">
+            <div class="section-heading"><h2><span>03</span>画面设置</h2><span id="source-tag" class="mode-tag">模板模式</span></div>
+            <label class="field"><span>画面来源</span><select id="source"><option value="template">原有动作模板</option><option value="character">自定义角色立绘</option></select></label>
+            <label class="field" id="lead-field" hidden><span>出镜角色</span><select id="lead_character"></select></label>
+            <p id="source-note" class="field-hint">原有模板中的人物固定，新增角色不会自动替换模板人物。</p>
+            <label class="field" id="template-field"><span>动作素材</span><select id="template"></select></label>
+            <div class="two-fields">
+              <label class="field" id="style-field"><span>模板画风</span><select id="style" aria-describedby="style-hint"><option value="template">现有 3D 模板</option></select></label>
+              <label class="field"><span>画面比例</span><select id="ratio"><option value="9:16">9:16 · 竖屏</option><option value="16:9">16:9 · 横屏</option><option value="1:1">1:1 · 方形</option></select></label>
+              <label class="field"><span>镜头数量</span><input id="count" type="number" min="1" max="12" step="1" value="6" required></label>
+              <label class="field"><span>输出分辨率</span><select id="resolution"><option value="540">540p</option><option value="720">720p</option><option value="1080">1080p</option><option value="1440">2K · 1440p（缩放导出）</option></select></label>
+            </div>
+            <p id="style-hint" class="field-hint">角色画风在“编辑 / 生成”中选择；输出尺寸高于原图时使用缩放。</p>
+            <div id="video-settings">
+              <div class="two-fields">
+                <label class="field"><span>配音视频时长</span><select id="video_duration"><option value="12.25">约12秒 · 短对白</option><option value="30">30秒 · 完整反转</option></select></label>
+                <label class="field"><span>配音情绪</span><select id="video_mood"><option value="daily">日常对话</option><option value="reversal">爽文反转</option></select></label>
+              </div>
+              <p class="field-hint">模板视频为两名角色交替的四句对白，固定竖屏，导出分辨率跟随上方选择。30秒会循环原有动作。需要多人同框、新动作和自由对白，请打开<a href="/create">作品创作</a>。修改设置后先更新分镜。</p>
+            </div>
+          </section>
+        </fieldset>
+        <div class="control-actions">
+          <button type="submit" id="generate" class="button primary"><span aria-hidden="true">▶</span> 开始生成</button>
+          <div class="secondary-actions"><button type="button" id="stop" class="button" disabled>停止生成</button><button type="button" id="reset" class="button">重置</button></div>
+        </div>
+      </form>
+    </aside>
+    <section class="preview-area" aria-label="分镜预览展示区">
+      <div class="preview-heading"><div><div class="eyebrow">STORYBOARD</div><h1>分镜预览 <span id="shot-total">0</span></h1><p id="project-summary">把故事变成看得见的画面。</p></div><button id="view-mode" class="button small" title="切换紧凑网格">紧凑视图</button></div>
+      <div class="progress-panel">
+        <div class="progress-label"><span><i id="status-dot" class="status-dot"></i><strong id="status-title">准备就绪</strong></span><span id="progress-percent">0%</span></div>
+        <div id="progress" class="progress-track" role="progressbar" aria-label="生成进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+        <div class="status-line"><span id="status-text" role="status" aria-live="polite">正在连接本地制作器…</span><span id="ready-count">0 张已完成</span></div>
+      </div>
+      <div class="canvas-body">
+      <div class="grid-toolbar"><label class="selection"><input id="select-all" type="checkbox" disabled>全选</label><span id="grid-hint">点击完成的画面可放大查看</span></div>
+      <div id="shots" class="shot-grid" aria-label="分镜网格"></div>
+      <div id="empty-state" class="empty-state"><div class="empty-symbol" aria-hidden="true">▦</div><h2>第一组分镜，从这里开始</h2><p>在左侧写下剧本、调整参数，点击「开始生成」。<br>每个镜头完成后会自动显示在这里。</p><button id="empty-example" class="button">载入示例剧本</button></div>
+      </div>
+      <footer class="export-bar"><div><strong id="export-count">尚未选择图片</strong><small>PNG · ZIP <button id="image-folder" class="text-button">图片文件夹 ↗</button></small></div><div class="export-actions"><button id="video-button" class="button" title="使用四行台词与所选时长制作配音视频，按所选分辨率导出" disabled>生成配音视频</button><button id="video-folder" class="text-button">视频文件夹</button><button id="export-button" class="button primary" disabled>导出图片 <span aria-hidden="true">↓</span></button></div></footer>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="alert" hidden></div>
+  <dialog id="character-editor" aria-labelledby="character-editor-title">
+    <div class="dialog-heading"><strong id="character-editor-title">新增角色</strong><button type="button" class="icon-button" id="close-character" aria-label="关闭角色编辑">×</button></div>
+    <div class="character-editor-grid">
+      <form id="character-form">
+        <fieldset id="character-fields">
+          <label class="field"><span>角色名称</span><input id="role-name" maxlength="30" placeholder="输入角色名称" required></label>
+          <details class="portrait-settings"><summary>配音设置 · 可选</summary><section class="role-voice-panel" aria-label="角色配音设置"><div class="voice-heading"><strong>角色配音</strong><span class="available-badge" id="voice-count">本地音色</span></div><div class="voice-controls"><label class="field"><span>配音音色</span><select id="role-voice"></select></label><button type="button" id="preview-role-voice" class="button">生成试听</button></div><p id="role-voice-hint" class="field-hint"></p><audio id="role-voice-audio" controls preload="metadata" hidden></audio><p id="role-voice-status" class="field-hint" role="status"></p><p class="field-hint">保存后，自动拆分的镜头沿用该角色音色；修改音色无需重新绘制形象。</p></section></details>
+          <div class="two-fields">
+            <label class="field"><span>取景构图</span><select id="role-framing"><option value="full">全身 · 包含腿和鞋</option><option value="half">半身 · 腰部以上</option><option value="head">头像 · 面部与肩膀</option></select></label>
+            <label class="field"><span>人物画风</span><select id="role-style"><option value="3d">3D动画</option><option value="anime">日系插画</option><option value="guoman">国漫插画</option><option value="realistic">写实</option><option value="soft_photo" title="柔和光线与自然肤质，效果受绘图模型影响">柔光真人写真</option></select></label>
+          </div>
+          <label class="field" id="role-simple-field"><span>完整人物描述</span><textarea id="role-visual" maxlength="1200" rows="6" placeholder="描述人物的外貌、衣服、姿势和其他细节。"></textarea><small class="field-hint">只需这一段，不必重复填写头发、服装、姿势。</small></label><button id="toggle-role-fields" type="button" class="text-button">分项编辑旧设定</button><div id="role-legacy-fields" hidden><details class="portrait-settings"><summary>自定义人物特征</summary><p id="portrait-gender-hint" class="field-hint">外貌、发型、服装均可自由输入；下方是可点击的常用建议。</p><div id="portrait-feature-fields" class="two-fields"></div></details>
+          <label class="field"><span>外貌补充描述</span><textarea id="role-description" maxlength="1200" placeholder="补充外貌特征，无需重复已选择的内容。"></textarea></label>
+          <label class="field"><span>服装与配饰</span><textarea id="role-outfit" maxlength="150" placeholder="输入服装与配饰。"></textarea><small class="field-hint">只填服装、材质、颜色和配饰。若这里已写连衣裙，上方不要再保留另一套上装、下装；叠穿请写明关系。</small></label>
+          <label class="field"><span>性格与说话风格 <small>创作备注</small></span><textarea id="role-personality" maxlength="150" placeholder="输入角色的性格与说话风格。"></textarea></label>
+          <div class="portrait-settings"><strong>优先落实的特征</strong><p class="field-hint">最多选三项。会在绘制中加强这些要求，仍需检查实际图片。</p><div id="portrait-priorities" class="priority-choices"></div></div>
+          </div><div id="portrait-issues" class="portrait-issues" role="status" aria-live="polite" hidden></div>
+          <details class="portrait-settings" id="image-encoder-settings" hidden><summary>绘图文字理解 · 可选</summary>
+            <label class="field"><span>理解方式</span><select id="image-encoder" aria-describedby="image-encoder-scope image-encoder-note" disabled><option value="flux9" selected>标准</option><option value="flux9_heretic" disabled>社区实验</option></select></label>
+            <p id="image-encoder-scope" class="field-hint">这是全局设置，影响后续人物和分镜绘图，已有图片不变。切换只保存设置，不会开始生成。</p>
+            <p id="image-encoder-note" class="field-hint" role="status" aria-live="polite">社区实验版效果尚未经过本机生成验证，不保证比标准版更准确。</p>
+          </details>
+          <details class="portrait-settings" id="generation-advanced"><summary>高级绘制选项</summary>
+            <label class="field"><span>绘制方式</span><select id="portrait-mode"><option value="new">全新绘制</option><option value="reference">参考当前形象修改</option><option value="local">只改涂抹区域</option></select></label>
+            <p id="portrait-mode-hint" class="field-hint">根据设定绘制新图。改变构图时使用此方式。</p>
+            <div id="portrait-quality-fields">
+              <label class="field"><span>人物画质</span><select id="portrait-quality"><option value="hd">高清细化 · 1024×1536</option><option value="standard">标准 · 512×768（较快）</option></select></label>
+              <div class="priority-choices"><label class="priority-choice"><input type="checkbox" id="portrait-pose-guide" checked>姿势参考</label><label class="priority-choice"><input type="checkbox" id="portrait-face-refine" checked>面部细化</label></div>
+              <p id="portrait-quality-hint" class="field-hint">高清会增加绘制时间。面部细化可能改变长相，仍需检查眼睛和表情。姿势参考支持全身正面站立、双臂自然下垂，以及“盘腿而坐”。不匹配的姿势使用文字控制。</p>
+            </div>
+            <div class="portrait-content-check">
+              <label class="priority-choice"><input type="checkbox" id="portrait-content-check">成人敏感内容检查</label>
+              <p id="portrait-content-check-hint" class="field-hint">当前关闭。开启后，本地检查器会检查并拦截命中的图片；关闭时完全不加载检查器。它只检查成图，不控制绘图模型是否补画衣物。</p>
+            </div>
+            <label id="portrait-strength-field" class="field" hidden><span>修改幅度 <output id="portrait-strength-value">35%</output></span><input id="portrait-strength" type="range" min="10" max="85" step="5" value="35"></label>
+            <label class="field"><span>随机种子 <small>留空则每次随机</small></span><input id="portrait-seed" type="number" min="0" max="2147483647" step="1" placeholder="留空探索新形象，填数字便于比较修改"></label>
+            <div class="seed-actions"><button id="portrait-reuse-seed" type="button" class="text-button">沿用当前图片种子</button><button id="portrait-random-seed" type="button" class="text-button">恢复随机</button></div>
+            <p class="field-hint">固定种子有助于比较修改效果；改描述仍可能改变脸部。参考修改会保留原图构图。</p>
+          </details>
+        </fieldset>
+        <div class="character-form-actions"><button id="save-character" class="button" type="submit">保存设定</button><button id="draw-character" class="button primary" type="button">保存并生成人物</button></div>
+        <p id="character-model-status">正在检查本地模型…</p><button id="character-folder" type="button" class="text-button">打开角色文件夹 ↗</button>
+      </form>
+      <section class="portrait-panel" aria-label="人物形象预览">
+        <div class="portrait-frame"><img id="portrait-image" alt="人物形象" hidden><canvas id="portrait-mask" width="512" height="768" aria-label="在人物图上涂抹需要修改的区域" hidden></canvas><div id="portrait-placeholder"><b aria-hidden="true">＋</b><span>等待创建人物形象</span></div></div>
+        <div id="portrait-mask-tools" hidden><p class="field-hint">紫色区域会重新绘制，区域外保留原图。全身正面站姿中，仅涂抹脸部或鞋子时会放大该区域单独细化。可用鼠标或手指涂抹。</p><label class="field"><span>画笔大小</span><input id="portrait-brush" type="range" min="2" max="25" value="10"></label><div class="seed-actions"><button id="portrait-mask-undo" type="button" class="text-button">撤销一笔</button><button id="portrait-mask-clear" type="button" class="text-button">清空涂抹</button></div></div>
+        <p id="portrait-seed-info" class="field-hint"></p>
+        <p id="portrait-quality-info" class="field-hint" aria-live="polite"></p>
+        <div id="portrait-correction" hidden><label class="field"><span>想改哪里？</span><input id="portrait-instruction" maxlength="600" placeholder="例如：只把鞋子换成白色运动鞋，其余保持不变"></label><button id="apply-correction" type="button" class="button">按这句话修改当前形象</button><p class="field-hint">修改另存新版本，可切回原图；仍需核对有无连带变化。</p></div><p id="portrait-status" role="status"></p><progress id="portrait-progress" max="100" value="0" hidden aria-label="人物绘制进度"></progress>
+        <details id="portrait-audit" class="portrait-settings" hidden><summary>本次绘制依据 · 原文对照</summary><p id="portrait-audit-note" class="field-hint"></p><div id="portrait-audit-rows"></div></details>
+        <div class="portrait-bottom"><label id="portrait-version-field" class="field" hidden><span>已保存的形象</span><select id="portrait-version"></select></label><button type="button" id="stop-character" class="button" hidden>停止绘制</button><button type="button" id="use-character" class="button" disabled>用于分镜</button></div>
+        <p class="field-hint">每次修改另存为新版本，可随时切回旧图。局部修改只保留涂抹范围内的新画面。</p><a id="role-video" class="button" href="/create">让这个角色演短剧 ↗</a>
+      </section>
+    </div>
+  </dialog>
+  <dialog id="lightbox"><div class="dialog-heading"><strong id="lightbox-title">分镜预览</strong><button class="icon-button" id="close-lightbox" aria-label="关闭预览">×</button></div><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
+  <dialog id="help"><div class="dialog-heading"><strong>如何使用</strong><button class="icon-button" id="close-help" aria-label="关闭使用说明">×</button></div><ol><li>点击“新增角色”，编辑人物外貌与服装，再点击“保存并生成人物”。</li><li>制作图片：选择原有模板或角色立绘，点击“开始生成”，完成后批量导出图片。</li><li>制作新人物的视频：点击顶部“作品创作”，填写作品名称，先选好人物，再放入完整剧本。</li><li>软件会查找参考并安排画面和配音，准备完成后点击生成视频。需要逐镜调整时再进入高级编辑。</li></ol><p>作品创作使用本地动作模型生成新画面，并可制作口型。每镜可选 1–4 名角色，自动拆镜沿用角色音色；可逐镜试听、调整时长，开关字幕角色名。人物一致性和复杂动作仍需检查；大幅转头可能影响口型。停止会保留已完成的素材。</p><p>原有模板配音视频仍保留：四行台词按角色甲、角色乙、角色甲、角色乙的顺序，可选择约12秒或30秒。模板视频为竖屏，按所选分辨率导出。</p></dialog>
+</body>
+</html>

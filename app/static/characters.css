@@ -1,0 +1,68 @@
+.role-section .section-heading { gap: 9px; flex-wrap: wrap; }
+.role-section .section-heading h2 { margin-right: auto; }
+.add-role { color: var(--accent); background: #f4f5ff; border-color: #dce0fa; }
+.role-card { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 12px; border: 1px solid var(--line); border-radius: 9px; padding: 11px; background: #fcfcfd; }
+.role-cover { width: 64px; height: 88px; border: 0; padding: 0; border-radius: 6px; background: #eaedf5; overflow: hidden; color: #929ab0; font-size: 23px; }
+.role-cover img { width: 100%; height: 100%; object-fit: cover; }
+.role-info { min-width: 0; }
+.role-name { font-size: 12px; font-weight: 600; display: block; overflow-wrap: anywhere; }
+.role-description { font-size: 11px; color: #7b8597; line-height: 1.7; margin: 5px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.role-badge { font-size: 10px; color: #6f7ca3; }
+.role-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+.role-actions .text-button { padding: 2px 0; font-size: 10px; }
+.role-remove { margin-left: auto; color: #969ba6; }
+.character-empty { font-size: 12px; color: #7f899a; line-height: 1.8; padding: 14px; border: 1px dashed #d7dce7; border-radius: 8px; }
+.character-undo { font-size: 11px; background: #f0f3ff; border-radius: 6px; padding: 6px 10px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+#character-editor { width: min(1040px,94vw); max-width: 1040px; padding: 25px; max-height: 94dvh; overflow: auto; }
+#character-editor .dialog-heading { margin-bottom: 18px; }
+.character-editor-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 27px; align-items:start; }
+#character-form .field:first-child { margin-top: 0; }
+#character-form .two-fields .field { margin-top: 12px; }
+#character-form textarea { font-size: 12px; }
+#role-description { min-height: 75px; }
+#role-outfit,#role-personality { min-height: 65px; }
+.character-form-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; position:sticky; bottom:-25px; padding:12px 0; background:#fff; z-index:3; border-top:1px solid var(--line); }
+.character-form-actions .primary { flex: 1; }
+.portrait-panel { border-left: 1px solid var(--line); padding-left: 25px; min-width: 0; position:sticky; top:0; }
+.portrait-frame { aspect-ratio: 2/3; background: #f1f3f7; border: 1px solid #e4e7ed; border-radius: 9px; overflow: hidden; display: grid; place-items: center; position:relative; width:100%; }
+#portrait-image { width: 100%; height: 100%; object-fit: contain; }
+#portrait-placeholder { display: flex; align-items: center; flex-direction: column; gap: 12px; color: #9ba4b5; font-size: 12px; }
+#portrait-placeholder b { font-size: 39px; font-weight: 300; }
+#portrait-status { color: #768197; font-size: 11px; min-height: 40px; }
+#portrait-progress { width: 100%; height: 5px; accent-color: var(--accent); }
+.portrait-bottom { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+.portrait-bottom .field { flex: 1; min-width: 120px; }
+#character-model-status { font-size: 11px; color: #8390a4; margin-top: 10px; }
+#character-folder { font-size: 10px; padding-left: 0; }
+#source-note { margin-bottom: 12px; }
+#portrait-mask { position:absolute; inset:0; width:100%; height:100%; opacity:.45; touch-action:none; cursor:crosshair; }
+.portrait-settings { border-top:1px solid var(--line); padding-top:12px; margin-top:16px; }
+.portrait-settings summary { cursor:pointer; font-size:13px; color:#3c475c; font-weight:600; }
+.portrait-settings input,.portrait-settings select { font-size:12px; }
+#character-form .feature-suggestions { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:4px; margin-top:5px; }
+.feature-suggestions button { border:1px solid #e5e8f1; border-radius:4px; padding:3px 6px; background:#f7f8fc; color:#65738a; font-size:10px; }
+.feature-suggestions button:hover { border-color:#aeb7ec; color:var(--accent); }
+.seed-actions { display:flex; flex-wrap:wrap; gap:6px 16px; }
+.seed-actions .text-button { font-size:11px; padding:5px 0; }
+.portrait-issues { margin-top:12px; border:1px solid #e5c9a3; border-radius:7px; padding:9px 12px; background:#fff9f0; }
+#portrait-issues p { margin:3px 0; font-size:12px; color:#876335; }
+#portrait-issues .error { color:#a44131; }
+.portrait-issue + .portrait-issue { margin-top:10px; padding-top:8px; border-top:1px solid #efdac0; }
+.portrait-issue .text-button { text-align:left; font-size:12px; text-decoration:underline; padding:5px 0; }
+@media(max-width:600px) {
+  .app-header { height:auto; flex-wrap:wrap; gap:12px; padding-top:14px; padding-bottom:14px; }
+  .header-right { flex-wrap:wrap; min-width:0; gap:8px; }
+}
+#portrait-strength,#portrait-brush { padding:0; height:24px; accent-color:var(--accent); }
+@media(max-width:600px) { .character-editor-grid { grid-template-columns: minmax(0,1fr); gap: 20px; } .portrait-panel { border: 0; padding-left: 0; position:static; } #character-editor { padding: 20px; } .portrait-frame { max-width:320px; margin:0 auto; } .character-form-actions { bottom:-20px; } }
+.priority-choices{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px}
+.priority-choice{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.priority-choice input{width:auto;min-height:0;margin:0;accent-color:#5858d8}
+#portrait-audit{max-height:330px;overflow:auto;text-align:left}
+.audit-row{padding:10px 0;border-bottom:1px solid #e8eaf0;font-size:12px;overflow-wrap:anywhere}
+.audit-row:last-child{border-bottom:0}
+.audit-row strong{font-size:11px;color:#6c7185}
+.audit-row p{margin:4px 0}
+.audit-row small{color:#797f92;display:block;line-height:1.5}
+
+.role-voice-panel{border:1px solid #e3e7ed;border-radius:9px;padding:16px;display:grid;gap:10px;background:#fafbfc}.voice-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.available-badge{font-size:11px;color:#27745c;background:#eaf5ee;padding:3px 7px;border-radius:4px}.voice-controls{display:flex;align-items:end;gap:10px}.voice-controls label{flex:1;min-width:0;margin:0}.role-voice-panel audio{width:100%;height:36px}.role-voice-panel p{margin:0}
